@@ -1,0 +1,14 @@
+getproblem.js：点开页面，加载一个问题。
+getyourcart.js：加载购物车。
+intocart.js：加入购物车。
+outofcart.js：从购物车中删除。
+races_feedback.js：得到全局比赛记录。
+result_feedback.js：得到全局提交记录。
+result_feedback_in_race：得到当前比赛中所有人的提交记录。
+submitpage.js：验证和加入注册用户。
+changemotto.js：更改格言。
+problemset.js：加载problemset。
+addproblem.js：添加问题。
+ranklist.js：给出全局排行榜。
+前两个版本没想到好的检测方法，基本是肉眼编译，bug很多；
+这个版本应该是没什么问题，和简陋的前端（完全靠表单提交）交互过了的。
