@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>/*
+  function GetData()
+    {var xmlhttp=new XMLHttpRequest();
+	 xmlhttp.open("GET","http://localhost:8888",true);
+	 xmlhttp.onreadystatechange=function(){
+                if(xhr.readyState==4&&xhr.status==200)document.getElementById("res").innerHTML=xhr.responseText;
+                }
+     xmlhttp.send();
+     }*//*
+  function Insert()
+    {var xhr=new XMLHttpRequest();
+     xhr.open("GET","http://localhost:8888?username=bsoier&password=123456&motto=654321",true);
+	 //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	 xhr.send();
+	 }
+  
+  function Delete()
+    {var xhr=new XMLHttpRequest();
+	 var del=1;
+	 window.alert("删除！");
+	 xhr.open("POST","http://localhost:8888",true);
+	 xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	 xhr.send("del=1&username=nobody");
+     }*/
+</script>
+<title>nodejs操作数据库</title>
+</head>
+<body>
+
+<form name="input" action="http://localhost:8888/" method="post"/>
+requireuser:<input type="text" name="requireuser"/>
+racename:<input type="text" name="racename"/>
+username:<input type="text"  name="username"/>
+<input type="submit" value="提交"/>
+</form>
+
+<!--<button onclick="Delete()">删除</button>
+<div value="data">data_will_be_shown_here</div>-->
+</body>
+</html>
