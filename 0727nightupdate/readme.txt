@@ -13,7 +13,10 @@ submitpage.js：验证和加入注册用户。
 changemotto.js：更改格言。
 alterpeople.js：改其他用户的权限。
 ranklist.js：给出全局排行榜。
-（未写）starvation.js：饿死注册和临时用户。
+starvation.js：饿死注册和临时用户。
+change_avatar.js：加入用户头像。
+get_avatar.js：给出用户头像。
+profile.js：强化版get_user_authorization，给出所有用户信息。
 公告相关：
 add_announcement.js：添加公告。
 get_announcement.js：显示一场比赛中的公告。
@@ -26,7 +29,8 @@ get_user_authorization.js：给用户username返回其权限和比赛准入等级。
 races_feedback.js：得到（权限范围内）全局比赛记录。
 result_feedback.js：得到（权限范围内）全局提交记录。
 result_feedback_in_race.js：得到当前比赛中所有人的提交记录。
-（未写）situation_in_race：返回当前每个人每道题目的得分情况。
+situation_in_race.js：返回当前每个人每道题目的得分情况。
+situation_in_race_personal.js:返回一个特定的人每道题目的得分情况。
 难点：
 1、登录、权限验证
 2、加入比赛，并按时进行“开始一场比赛”、“结束一场比赛”这个事件

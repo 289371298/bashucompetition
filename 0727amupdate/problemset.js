@@ -55,7 +55,7 @@ function connect_and_feed(managelevel,res)
      function(err,result)
 	   {var tot=0,len=result.length;
 		for(var i=0;i<len;i++)
-		  {if(managelevel<result[i].level)continue;//目前是设置为不能看到严格大于自己managelevel的题目
+		  {if(managelevel<result[i].managelevel)continue;//目前是设置为不能看到严格大于自己managelevel的题目
            type[tot]=result[i].type;
 		   name[tot]=result[i].name;
            acnum[tot]=result[i].acnum;
