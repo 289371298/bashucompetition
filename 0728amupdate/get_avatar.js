@@ -8,7 +8,6 @@ var querystring=require('querystring');
 var mysql=require("mysql");
 var params,avatar;
 var fs=require('fs');
-var content=[],author=[],answer=[];
 var server=http.createServer(function(req,res)//传来的参数：requireuser，提出要求的用户
                               {if(req.url==="/favicon.ico")return;
 							   res.setHeader('Access-Control-Allow-Origin','*');  

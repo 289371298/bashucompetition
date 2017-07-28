@@ -1,5 +1,5 @@
 //8888端口的简单小函数之二
-//给racename返回其他信息
+//给raceid返回其他信息
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");

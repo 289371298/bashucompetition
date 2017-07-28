@@ -1,5 +1,5 @@
 //在8888号端口加载题目
-//要求参数：problem_id,username
+//要求参数：problem_id,requireuser
 //返回参数：题目应该有的各项信息
 //(id,memory,time,type,name,content_description,content_input,content_output,content_in_explain,content_out_explain
 //content_data_range,acnum,trynum,pichtml)
@@ -36,7 +36,7 @@ function connect_and_check(params,res)
       });
    var ans;
    connection.connect();
-   connection.query('SELECT managelevel FROM users WHERE username="'+params.username+'"',
+   connection.query('SELECT managelevel FROM users WHERE username="'+params.requireuser+'"',
                     function(err,result)
 					  {ans=result[0].managelevel;
 					   //console.log("success"+ans);
