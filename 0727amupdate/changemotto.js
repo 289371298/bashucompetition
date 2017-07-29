@@ -3,14 +3,14 @@
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params;
+var params,success;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
    {if(req.url==="/favicon.ico")return;
 	var body='',flag=0;
 	res.setHeader('Access-Control-Allow-Origin','*');  
-	res.writeHead(200,{'Content-Type' : 'plain/text'});
+	res.writeHead(200,{'Content-Type' : 'application/JSON'});
 	req.on('data',function(data)
 					{//console.log(data+"arrival");
 					 body+=data;
@@ -27,11 +27,15 @@ var server=http.createServer
                     connection.connect();
                     connection.query('UPDATE users SET motto='+'"'+params.new_motto+'" WHERE username='+'"'+params.requireuser+'"',  
                     function(err,result){  
-                      if(err){res.write("failed to change");  
+                      if(err){success=0;
+					          var obj=JSON.stringify({success});
+						      res.write(obj);  
                               console.log('修改格言失败'); 
                               console.log(err.message);
                		          }
-					  else{res.write("successfully changed"); 
+					  else{success=1;
+					       var obj=JSON.stringify({success});
+						   res.write(obj);  
 						   console.log('修改格言成功');
 						   }  
 						   });

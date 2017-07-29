@@ -3,14 +3,14 @@
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params;
+var params,success;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
    {if(req.url==="/favicon.ico")return;
 	var body='',flag=0;
 	res.setHeader('Access-Control-Allow-Origin','*');  
-	res.writeHead(200,{'Content-Type' : 'plain/text'});
+	res.writeHead(200,{'Content-Type' : 'application/JSON'});
 	req.on('data',function(data)
 					{//console.log(data+"arrival");
 					 body+=data;
@@ -29,11 +29,15 @@ var server=http.createServer
                     connection.query('insert into cart (problem_id,username,problem_name) values(?,?,?)',  
                     [params.problem_id,params.username,params.problem_name],
                     function(err,result){  
-                      if(err){res.write("problem cannot into cart!");  
+                      if(err){success=0;
+					          var obj=JSON.stringify({success});
+						      res.write(obj);  
                               console.log('添加题目失败'); 
                               console.log(err.message);
                		          }
-					  else{res.write("problem has gone into cart!"); 
+					  else{success=0;
+					       var obj=JSON.stringify({success});
+						   res.write(obj);  
 						   console.log('添加题目成功');
 						   }  
 						   });

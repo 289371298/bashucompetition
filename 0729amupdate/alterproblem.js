@@ -1,10 +1,10 @@
-//在8888号端口添加问题（默认这个界面经过了身份验证）
-//需求参数：mother_id,memory,time,type,name,content_description,content_input,content_output,content_in_explain,
+//在8888号端口修改问题（默认这个界面经过了身份验证）
+//需求参数：problem_id,mother_id,memory,time,type,name,content_description,content_input,content_output,content_in_explain,
 //content_out_explain,content_data_range,pichtml,managelevel
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params,success;
+var params;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
@@ -26,24 +26,40 @@ var server=http.createServer
 	                                                       database:'bsoj_problems'
                                                            });
                     connection.connect();
-                    connection.query('insert into problems (mother_id,memory,time,type,name,content_description,content_input,'+
+                    connection.query('UPDATE problems SET'+
+					                 'mother_id='+params.mother_id+
+									 ' ,memory='+params.memory+
+									 ' ,time='+params.time+
+									 ' ,type='+params.type+
+									 ' ,name="'+params.name+'"'+
+									 ' ,content_description="'+params.content_description+'"'+
+									 ' ,content_input="'+params.content_input+'"'+
+									 ' ,content_output="'+params.content_output+'"'+
+									 ' ,content_in_explain="'+params.content_in_explain+'"'+
+									 ' ,content_out_explain="'+params.content_out_explain+'"'+
+									 ' ,content_data_range="'+params.content_data_range+'"'+
+									 ' ,pichtml="'+params.pichtml+'"'+
+									 ' ,managelevel='+params.managelevel+
+									 ' WHERE id='+params.problem_id,
+					/*connection.query('UPDATE problems SET (mother_id,memory,time,type,name,content_description,content_input,'+
 					                 'content_output,content_in_explain,content_out_explain,content_data_range,acnum,trynum,pichtml,managelevel)'+
 									 'values(?,?,?,?,?,?,?,?,?,?,?,0,0,?,?)',  
                     [params.mother_id,params.memory,params.time,params.type,params.name,
 					                 params.content_description,params.content_input,params.content_output,
 									 params.content_in_explain,params.content_out_explain,params.content_data_range,
 									 0,0,params.pichtml,params.managelevel],
-                    function(err,result){  
+                    */
+					function(err,result){  
                       if(err){success=0;
-					          var obj=JSON.stringify(success);
+						      var obj=stringify({success});
 						      res.write(obj);  
-                              console.log('添加题目失败'); 
+                              console.log('修改题目失败'); 
                               console.log(err.message);
                		          }
 					  else{success=1;
-					       var obj=JSON.stringify(success);  
+					       var obj=stringify({success});
 						   res.write(obj); 
-						   console.log('添加题目成功');
+						   console.log('修改题目成功');
 						   }  
 						   });
                     connection.end();  

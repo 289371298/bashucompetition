@@ -1,9 +1,9 @@
-//在8888号端口加入一个头像
-//要求参数：requireuser,new_avatar
+//在8888号端口删除题目
+//要求参数：problem_id
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params,success;
+var params;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
@@ -12,7 +12,7 @@ var server=http.createServer
 	res.setHeader('Access-Control-Allow-Origin','*');  
 	res.writeHead(200,{'Content-Type' : 'application/JSON'});
 	req.on('data',function(data)
-					{console.log(data+"arrival");
+					{//console.log(data+"arrival");
 					 body+=data;
 					 params=querystring.parse(decodeURIComponent(body));
 					 }
@@ -23,23 +23,23 @@ var server=http.createServer
 	                                                       user:'root',
 	                                                       password:'990311',
 	                                                       port:'3306',
-	                                                       database:'bsoj_users'
+	                                                       database:'bsoj_problems'
                                                            });
                     connection.connect();
-                    connection.query('UPDATE users SET avatar="'+params.new_avatar+'"WHERE username="'+params.requireuser+'"',  
-                    function(err,result){				
-                      if(err){//res.write("avatar cannot into user!");
+                    connection.query('DELETE FROM problems WHERE id='+params.problem_id,  
+                    function(err,result){  
+                      if(err){//res.write("problem cannot out of cart!");
                               success=0;
-                              var obj=JSON.stringify({success});
+							  var obj=JSON.stringify({success});
                               res.write(obj);							  
-                              console.log('添加头像失败'); 
+                              console.log('删除题目失败'); 
                               console.log(err.message);
                		          }
-					  else{//res.write("avatar has gone into user!"); 
-					       success=1;
-                           var obj=JSON.stringify({success});
+					  else{//res.write("problem has gone out of cart!"); 
+						   success=1;
+						   var obj=JSON.stringify({success});
                            res.write(obj);
-						   console.log('添加头像成功');
+						   console.log('删除题目成功');
 						   }  
 						   });
                     connection.end();  

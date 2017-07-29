@@ -3,7 +3,7 @@
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params;
+var params,success;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
@@ -29,11 +29,17 @@ var server=http.createServer
                     connection.query('DELETE FROM cart WHERE username="'+params.username+'" AND problem_id='+params.problem_id,  
                     [params.problem_id,params.username,params.problem_name],
                     function(err,result){  
-                      if(err){//res.write("problem cannot out of cart!");  
+                      if(err){success=0;
+					          var obj=JSON.stringify({success});
+						      res.write(obj);
+                              					  
                               console.log('删除题目失败'); 
                               console.log(err.message);
                		          }
-					  else{//res.write("problem has gone out of cart!"); 
+					  else{success=1;
+						   //res.write("problem has gone out of cart!"); 
+						   var obj=JSON.stringify({success});
+						   res.write(obj);
 						   console.log('删除题目成功');
 						   }  
 						   });

@@ -52,7 +52,7 @@ function connect_and_check(params,res)
                       if(ans<result[0].managelevel){console.log("Access Denied");}//权限不足
 					  else {//write
 					       var obj=JSON.stringify({
-						             "id":result[0].id,
+						             "mother_id":result[0].mother_id,
 						             "memory":result[0].memory,
 									 "time":result[0].time,
 									 "type":result[0].type,

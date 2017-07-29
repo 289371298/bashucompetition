@@ -3,14 +3,14 @@
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params;
+var params,success;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
    {if(req.url==="/favicon.ico")return;
 	var body='',flag=0;
 	res.setHeader('Access-Control-Allow-Origin','*');  
-	res.writeHead(200,{'Content-Type' : 'plain/text'});
+	res.writeHead(200,{'Content-Type' : application/JSON'});
 	req.on('data',function(data)
 					{console.log(data+"arrival");
 					 body+=data;
@@ -28,11 +28,17 @@ var server=http.createServer
                     connection.connect();
                     connection.query('DELETE FROM allannouncements WHERE raceid="'+params.raceid+'"',  
                     function(err,result){						
-                      if(err){//res.write("announcement cannot out of race!");  
+                      if(err){//res.write("announcement cannot out of race!"); 
+                              success=0;
+                              var obj=JSON.stringify({success});
+							  res.write(obj); 
                               console.log('删除公告失败'); 
                               console.log(err.message);
                		          }
 					  else{//res.write("announcement has gone out of race!"); 
+					       success=1;
+						   var obj=JSON.stringify({success});
+                           res.write(obj);						   
 						   console.log('删除公告成功');
 						   }  
 						   });

@@ -3,14 +3,14 @@
 var http=require("http");
 var querystring=require('querystring');
 var mysql=require("mysql");
-var params;
+var params,success;
 var fs=require('fs');
 var server=http.createServer
 (function(req,res)
    {if(req.url==="/favicon.ico")return;
 	var body='',flag=0;
 	res.setHeader('Access-Control-Allow-Origin','*');  
-	res.writeHead(200,{'Content-Type' : 'plain/text'});
+	res.writeHead(200,{'Content-Type' : 'application/JSON'});
 	req.on('data',function(data)
 					{console.log(data+"arrival");
 					 body+=data;
@@ -31,17 +31,20 @@ var server=http.createServer
 					console.log(params.content);
 					console.log(params.author);
 					console.log(params.answer);
-					console.log("step2");
                     connection.query('INSERT INTO allannouncements (raceid,content,author,answer) values(?,?,?,?)',  
                     [params.raceid,params.content,params.author,params.answer],
-                    function(err,result){
-                      console.log("step3");						
+                    function(err,result){						
                       if(err){//res.write("announcement cannot into race!");  
+					          success=0;
+                              var obj=JSON.stringify({success});
+                              res.write(obj);							  
                               console.log('添加公告失败'); 
                               console.log(err.message);
                		          }
 					  else{//res.write("announcement has gone into race!"); 
-					       
+					       success=1;
+						   var obj=JSON.stringify({success});
+                           res.write(obj);	
 						   console.log('添加公告成功');
 						   }  
 						   });
