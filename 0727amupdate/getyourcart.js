@@ -7,20 +7,21 @@ var querystring=require('querystring');
 var mysql=require("mysql");
 var params;
 var fs=require('fs');
-var problem_id=[],problem_name=[];
+var stars=[];
 var server=http.createServer(function(req,res)//传来的参数：requireuser，提出要求的用户
                               {if(req.url==="/favicon.ico")return;
 							   res.setHeader('Access-Control-Allow-Origin','*');  
 							   res.writeHead(200,{'Content-Type' : 'application/JSON'});
 							   var body='',flag=0;
 						       req.on('data',function(data)
-							                         {//console.log(data+"arrival");
+							                         {console.log("data!");
+													  console.log(data+"arrival");
 						                              body+=data;
 													  params=querystring.parse(decodeURIComponent(body));
 						                              }
 								      );
-							   req.on('end',function(){connect_and_feed(params,res);});
-							   res.end();
+							   req.on('end',function(){console.log("end!"),connect_and_feed(params,res);});
+							   
 							  });	
 server.listen(8888,"localhost",function(){
     console.log("开始监听8888...");
@@ -38,12 +39,14 @@ function connect_and_feed(params,res)
 	   {var tot=0,len=result.length;
 	    console.log(len);
 		for(var i=0;i<len;i++)
-		  {problem_name[tot]=result[i].problem_name;
-           problem_id[tot]=result[i].problem_id;
+		  {stars[tot]={};
+		   stars[tot].problem_name=result[i].problem_name;
+           stars[tot].problem_id=result[i].id;
 		   tot++;
 		   }  			
-	   var obj=JSON.stringify({"tot":tot,"problem_id":problem_id,"problem_name":problem_name});
-		console.log(obj);//res.write(obj);
+	   var obj=JSON.stringify({stars});
+		console.log(obj);
+		res.write(obj);res.end();
 		}
                     );   
    connection.end();

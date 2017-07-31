@@ -33,7 +33,7 @@ function connect_and_feed(params,res)
 	                                      database:'bsoj_users'
                                          });
    connection.connect();
-   connection.query('SELECT * FROM users WHERE username='+"'"+params.requireuser+"'",
+   connection.query('UPDATE  users SET username='+"'"+params.requireuser+"'",
      function(err,result)
 	   {//console.log("Res="+result[0].racelevel+' '+result[0].managelevel);
 		racelevel=result[0].racelevel;
